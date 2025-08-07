@@ -10,15 +10,15 @@ export const routes: Routes = [
   { path: 'home', component: Home },
   {
     path: 'admin',
-    component: Admin,
+    component: Admin, 
     canActivate: [AuthGuard],
-    data: { roles: ['Admin'] },
+    data: { roles: ['admin'] },
   },
   {
     path: 'user',
     component: User,
     canActivate: [AuthGuard],
-    data: { roles: ['User'] },
+    data: { roles: ['user'] },
   },
   { path: 'login', component: Login },
   { path: 'forbidden', component: Forbidden },

@@ -21,7 +21,7 @@
         </li>
         <li class="nav-item">
           <a
-            *ngIf="roleMatch(['Admin'])"
+            *ngIf="roleMatch(['admin'])"
             class="nav-link active"
             aria-current="page"
             routerLink="/admin"
@@ -30,7 +30,7 @@
         </li>
         <li class="nav-item">
           <a
-            *ngIf="roleMatch(['User'])"
+            *ngIf="roleMatch(['user'])"
             class="nav-link active"
             aria-current="page"
             routerLink="/user"

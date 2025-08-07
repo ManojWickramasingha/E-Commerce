@@ -9,7 +9,8 @@ import {
 import { catchError, Observable, throwError } from 'rxjs';
 import { UserAuth } from '../_services/user-auth';
 import { Router } from '@angular/router';
-
+import { Injectable } from '@angular/core';
+@Injectable()
 export class AuthIntercepter implements HttpInterceptor {
   constructor(private userAuthService: UserAuth,private router:Router) {}
   intercept(

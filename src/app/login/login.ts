@@ -16,11 +16,11 @@ export class Login {
   login(loginForm: NgForm) {
     this.userService.login(loginForm).subscribe({
       next: (response:any) => {
-        this.userAuthService.setRoles(response.userDTO.roles);
+        this.userAuthService.setRoles(response.user.roles);
         this.userAuthService.setJwtToken(response.token);
 
-        const role = response.userDTO.roles[0].name;
-        if(role == 'Admin'){
+        const role = response.user.roles[0].name;
+        if(role == 'admin'){
           this.router.navigate(['/admin']);
         }else{
           this.router.navigate(['/user']);

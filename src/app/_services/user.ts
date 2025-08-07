@@ -2,6 +2,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { UserAuth } from './user-auth';
+import { Text } from '@angular/compiler';
 
 @Injectable({
   providedIn: 'root',
@@ -25,13 +26,13 @@ export class User {
   public matchRoles(allowedRoles: any): boolean {
     let isMatch = false;
 
-    const userRoles: any = JSON.parse(this.userAuthService.getRoles()+"");
-    
+    const userRoles: any = JSON.parse(this.userAuthService.getRoles() + '');
+
     if (userRoles != null && userRoles) {
       for (let i = 0; i < userRoles.length; i++) {
         for (let j = 0; j < allowedRoles.length; j++) {
           //console.log(userRoles[i]);
-          if (userRoles[i].name === allowedRoles[j]){
+          if (userRoles[i].name === allowedRoles[j]) {
             isMatch = true;
             return isMatch;
           } else {
@@ -40,6 +41,12 @@ export class User {
         }
       }
     }
-    return userRoles;
+    return isMatch;
+  }
+
+  public forUser() {
+    return this.httpClient.get(this.PATH_URL_API + '/api/v1/user/forUser', {
+      responseType: 'text',
+    });
   }
 }
