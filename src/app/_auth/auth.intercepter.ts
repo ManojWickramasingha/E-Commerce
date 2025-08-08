@@ -2,7 +2,7 @@ import {
     HttpErrorResponse,
   HttpEvent,
   HttpHandler,
-  HttpHeaders,
+  HttpHandlerFn,
   HttpInterceptor,
   HttpRequest,
 } from '@angular/common/http';
@@ -21,7 +21,7 @@ export class AuthIntercepter implements HttpInterceptor {
       return next.handle(req.clone());
     }
 
-    const token = this.userAuthService.getJwtToken();
+    const token = JSON.parse(this.userAuthService.getJwtToken());
 
     req = this.addToken(req, token);
 

@@ -7,7 +7,7 @@ import { Forbidden } from './forbidden/forbidden';
 import { AuthGuard } from './_auth/auth-guard';
 
 export const routes: Routes = [
-  { path: 'home', component: Home },
+  { path: '', component: Home },
   {
     path: 'admin',
     component: Admin, 

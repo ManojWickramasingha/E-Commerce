@@ -2,14 +2,13 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { UserAuth } from './user-auth';
-import { Text } from '@angular/compiler';
 
 @Injectable({
   providedIn: 'root',
 })
 export class User {
   PATH_URL_API = 'http://localhost:9090';
-  requestHeader = new HttpHeaders({ No_Auth: 'True' });
+  requestHeader = new HttpHeaders({ 'No-Auth': 'True' });
   constructor(
     private httpClient: HttpClient,
     private userAuthService: UserAuth
@@ -43,10 +42,13 @@ export class User {
     }
     return isMatch;
   }
-
+  
+  
   public forUser() {
+    
+   
     return this.httpClient.get(this.PATH_URL_API + '/api/v1/user/forUser', {
-      responseType: 'text',
+      responseType: 'text'
     });
   }
 }

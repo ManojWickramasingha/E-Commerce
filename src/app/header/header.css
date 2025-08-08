@@ -1,0 +1,13 @@
+
+.example-spacer {
+  flex: 1 1 auto;
+}
+.toolbar-container{
+    background-color: rgba(118, 94, 253, 0.822);
+    color: white;
+}
+.caprasimo-regular {
+  font-family: "Caprasimo", serif;
+  font-weight: 400;
+  font-style: normal;
+}

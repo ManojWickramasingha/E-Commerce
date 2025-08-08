@@ -5,23 +5,23 @@ import { User as user } from '../_services/user';
   selector: 'app-user',
   imports: [],
   templateUrl: './user.html',
-  styleUrl: './user.css'
+  styleUrl: './user.css',
 })
-export class User implements OnInit{
-  constructor(private userService:user){}
+export class User implements OnInit {
+  constructor(private userService: user) {}
   ngOnInit(): void {
     this.forUser();
   }
- public message:string = '';
-  forUser(){
+  public message: string = '';
+  forUser() {
     this.userService.forUser().subscribe({
-      next: response => {
+      next: (response) => {
+        console.log(response);
         this.message = response;
       },
-      error: error => {
+      error: (error) => {
         console.log(error);
-      }
-    })
+      },
+    });
   }
 }
-  

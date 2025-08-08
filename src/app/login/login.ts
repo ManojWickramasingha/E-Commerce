@@ -1,15 +1,18 @@
-import { Component } from '@angular/core';
+import { ChangeDetectionStrategy,Component } from '@angular/core';
 import { FormsModule, NgForm } from '@angular/forms';
 import { User } from '../_services/user';
 import { UserAuth } from '../_services/user-auth';
 import { Router } from '@angular/router';
+import {MatFormFieldModule} from '@angular/material/form-field';
+import {MatInputModule} from '@angular/material/input';
 
 
 @Component({
   selector: 'app-login',
-  imports: [FormsModule],
+  imports: [FormsModule,MatFormFieldModule,MatInputModule],
   templateUrl: './login.html',
   styleUrl: './login.css',
+  changeDetection:ChangeDetectionStrategy.OnPush
 })
 export class Login {
   constructor(private userService: User,private userAuthService:UserAuth,private router:Router) {}
