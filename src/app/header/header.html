@@ -5,4 +5,9 @@
   <button *ngIf="isLogin()" class="btn btn-danger ms-1" (click)="logOut()">LogOut</button>
 </mat-toolbar>
 
+<mat-toolbar class="toolbar-container caprasimo-regular" *ngIf="isLogin()">
+  <button matButton routerLink="/" class="text-white">Home</button>
+  <button  *ngIf="isAdmin()"  matButton class="ms-2 text-white" routerLink="/createNewProduct" >Create New Product</button>
+</mat-toolbar>
+
 

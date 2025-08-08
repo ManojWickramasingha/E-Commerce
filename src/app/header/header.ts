@@ -34,4 +34,7 @@ export class Header {
   public roleMatch(allowedRoles: any) {
     return this.userService.matchRoles(allowedRoles);
   }
+  public isAdmin(){
+    return this.userAuthService.isAdmin();
+  }
 }

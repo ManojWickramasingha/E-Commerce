@@ -5,6 +5,7 @@ import { User } from './user/user';
 import { Login } from './login/login';
 import { Forbidden } from './forbidden/forbidden';
 import { AuthGuard } from './_auth/auth-guard';
+import { CreateNewProduct } from './create-new-product/create-new-product';
 
 export const routes: Routes = [
   { path: '', component: Home },
@@ -22,4 +23,5 @@ export const routes: Routes = [
   },
   { path: 'login', component: Login },
   { path: 'forbidden', component: Forbidden },
+  {path:'createNewProduct',component:CreateNewProduct}
 ];

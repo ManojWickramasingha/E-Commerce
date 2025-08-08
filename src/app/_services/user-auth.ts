@@ -29,5 +29,10 @@ export class UserAuth {
     return (Boolean)(this.getRoles() && this.getJwtToken());
   }
 
+  public isAdmin():boolean{
+    let userRoles:any = JSON.parse(this.getRoles()+"");
+    return userRoles[0].name === 'admin';
+  }
+
 
 }
