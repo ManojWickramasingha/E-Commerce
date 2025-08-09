@@ -6,6 +6,8 @@ import { MatButtonModule } from '@angular/material/button';
 import { product } from '../_module/Product';
 import { FormsModule, NgForm } from '@angular/forms';
 import { ProductService } from '../_services/product-service';
+import { FileHandle } from '../_module/FileHandle.model';
+import { DomSanitizer } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-create-new-product',
@@ -21,16 +23,19 @@ import { ProductService } from '../_services/product-service';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class CreateNewProduct {
-  constructor(private productService:ProductService){}
+  constructor(private productService:ProductService,private sanitizer:DomSanitizer){}
   protected product: product = {
     name: '',
     description: '',
     discountedPrice: 0,
     actualPrice: 0,
+    productImages:[]
   };
 
   public addProduct(productForm:NgForm){
-    this.productService.addProduct(this.product).subscribe({
+    const productFormData = this.prepareFormData(this.product);
+
+    this.productService.addProduct(productFormData).subscribe({
       next: response=>{
         console.log(response);
         productForm.reset();
@@ -39,5 +44,33 @@ export class CreateNewProduct {
         console.log(err);
       }
     })
+  }
+
+  onFileselected(event:any){
+      const file = event.target.files[0];
+
+      const fileHandle:FileHandle = {
+        file:file,
+        url:this.sanitizer.bypassSecurityTrustUrl(
+          window.URL.createObjectURL(file)
+        )
+      }
+
+      this.product.productImages.push(fileHandle);
+  }
+
+  prepareFormData(product:product):FormData{
+    const formData = new FormData();
+
+    formData.append('product', new Blob([JSON.stringify(product)],{type:'application/json'}))
+
+    for(let i=0;i<product.productImages.length;i++){
+      formData.append('images',
+        product.productImages[i].file,
+        product.productImages[i].file.name
+      )
+    }
+
+    return formData;
   }
 }

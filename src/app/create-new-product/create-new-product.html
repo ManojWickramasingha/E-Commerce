@@ -31,7 +31,9 @@
         </form>
 
       </div>
-      <div class="col-6">Image</div>
+      <div class="col-6">
+        <input type="file" name="file" id="file" (change)="onFileselected($event)">
+      </div>
     </div>
   </div>
 </div>
