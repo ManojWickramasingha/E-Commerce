@@ -5,34 +5,73 @@
         <form #productForm="ngForm" (ngSubmit)="addProduct(productForm)">
           <mat-form-field appearance="outline" class="w-100">
             <mat-label>Enter Product Name here</mat-label>
-            <input matInput placeholder="Product Name" [(ngModel)]="product.name" name="name"/>
+            <input
+              matInput
+              placeholder="Product Name"
+              [(ngModel)]="product.name"
+              name="name"
+            />
           </mat-form-field>
 
           <mat-form-field appearance="outline" class="w-100">
             <mat-label>Enter Product Discription here</mat-label>
-            <input matInput placeholder="Product Description" [(ngModel)]="product.description" name="description"/>
+            <input
+              matInput
+              placeholder="Product Description"
+              [(ngModel)]="product.description"
+              name="description"
+            />
           </mat-form-field>
 
           <mat-form-field appearance="outline" class="w-100">
             <mat-label>Enter Product Discounted Price here</mat-label>
-            <input matInput placeholder="Product Discounted Price" [(ngModel)]="product.discountedPrice" name="discountedPrice" />
+            <input
+              matInput
+              placeholder="Product Discounted Price"
+              [(ngModel)]="product.discountedPrice"
+              name="discountedPrice"
+            />
           </mat-form-field>
 
           <mat-form-field appearance="outline" class="w-100">
             <mat-label>Enter Product Actual Price here</mat-label>
-            <input matInput placeholder="Product Actual Price" [(ngModel)]="product.actualPrice" name="actualPrice"/>
+            <input
+              matInput
+              placeholder="Product Actual Price"
+              [(ngModel)]="product.actualPrice"
+              name="actualPrice"
+            />
           </mat-form-field>
 
           <div class="d-flex justify-content-end">
             <button matFab extended>Cancel</button>
-            <button type="submit" matFab extended class="ms-2">Add Product</button>
+            <button type="submit" matFab extended class="ms-2">
+              Add Product
+            </button>
           </div>
-
         </form>
-
       </div>
       <div class="col-6">
-        <input type="file" name="file" id="file" (change)="onFileselected($event)">
+        <div>
+          <input
+            type="file"
+            name="file"
+            id="file"
+            (change)="onFileselected($event)"
+          />
+        </div>
+        <div class="mt-5">
+          <div class="row">
+            <mat-grid-list cols="4" rowHeight="1:1">
+              <mat-grid-tile *ngFor="let file of product.productImages; let i = index;" >
+                <div style="position: relative"  class="p-1">
+                   <span class="btn-remove-image" (click)="removeImage(i)">x</span>
+                  <img [src]="file.url" width="100px" height="100px" />
+                </div>
+              </mat-grid-tile>
+            </mat-grid-list>
+          </div>
+        </div>
       </div>
     </div>
   </div>

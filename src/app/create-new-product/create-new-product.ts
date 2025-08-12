@@ -8,6 +8,8 @@ import { FormsModule, NgForm } from '@angular/forms';
 import { ProductService } from '../_services/product-service';
 import { FileHandle } from '../_module/FileHandle.model';
 import { DomSanitizer } from '@angular/platform-browser';
+import { MatGridListModule } from '@angular/material/grid-list';
+import { NgFor } from '@angular/common';
 
 @Component({
   selector: 'app-create-new-product',
@@ -17,60 +19,73 @@ import { DomSanitizer } from '@angular/platform-browser';
     MatDividerModule,
     MatButtonModule,
     FormsModule,
+    MatGridListModule,
+    NgFor,
   ],
   templateUrl: './create-new-product.html',
   styleUrl: './create-new-product.css',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class CreateNewProduct {
-  constructor(private productService:ProductService,private sanitizer:DomSanitizer){}
+  constructor(
+    private productService: ProductService,
+    private sanitizer: DomSanitizer
+  ) {}
   protected product: product = {
     name: '',
     description: '',
     discountedPrice: 0,
     actualPrice: 0,
-    productImages:[]
+    productImages: [],
   };
 
-  public addProduct(productForm:NgForm){
+  public addProduct(productForm: NgForm) {
     const productFormData = this.prepareFormData(this.product);
 
     this.productService.addProduct(productFormData).subscribe({
-      next: response=>{
+      next: (response) => {
         console.log(response);
         productForm.reset();
       },
-      error:err=>{
+      error: (err) => {
         console.log(err);
-      }
-    })
+      },
+    });
   }
 
-  onFileselected(event:any){
-      const file = event.target.files[0];
+  onFileselected(event: any) {
+    const file = event.target.files[0];
 
-      const fileHandle:FileHandle = {
-        file:file,
-        url:this.sanitizer.bypassSecurityTrustUrl(
-          window.URL.createObjectURL(file)
-        )
-      }
+    const fileHandle: FileHandle = {
+      file: file,
+      url: this.sanitizer.bypassSecurityTrustUrl(
+        window.URL.createObjectURL(file)
+      ),
+    };
 
-      this.product.productImages.push(fileHandle);
+    this.product.productImages.push(fileHandle);
   }
 
-  prepareFormData(product:product):FormData{
+  prepareFormData(product: product): FormData {
     const formData = new FormData();
 
-    formData.append('product', new Blob([JSON.stringify(product)],{type:'application/json'}))
+    formData.append(
+      'product',
+      new Blob([JSON.stringify(product)], { type: 'application/json' })
+    );
 
-    for(let i=0;i<product.productImages.length;i++){
-      formData.append('images',
+    for (let i = 0; i < product.productImages.length; i++) {
+      formData.append(
+        'images',
         product.productImages[i].file,
         product.productImages[i].file.name
-      )
+      );
     }
 
     return formData;
+  }
+
+  removeImage(index: number) {
+    this.product.productImages.splice(index, 1);
   }
 }
