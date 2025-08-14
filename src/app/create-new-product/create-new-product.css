@@ -13,3 +13,16 @@ mat-grid-tile{
     height: auto;
     text-align: center;
 }
+.drop-area{
+    width:100%;
+    height: 8rem;
+    border: dashed 1px #aaa;
+    background-color: #eee;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.browse-btn{
+    color: blue;
+    cursor: pointer;
+}
