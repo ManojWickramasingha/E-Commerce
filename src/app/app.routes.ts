@@ -11,7 +11,7 @@ export const routes: Routes = [
   { path: '', component: Home },
   {
     path: 'admin',
-    component: Admin, 
+    component: Admin,
     canActivate: [AuthGuard],
     data: { roles: ['admin'] },
   },
@@ -23,5 +23,10 @@ export const routes: Routes = [
   },
   { path: 'login', component: Login },
   { path: 'forbidden', component: Forbidden },
-  {path:'createNewProduct',component:CreateNewProduct}
+  {
+    path: 'createNewProduct',
+    component: CreateNewProduct,
+    canActivate: [AuthGuard],
+    data: { roles: ['admin'] },
+  },
 ];
