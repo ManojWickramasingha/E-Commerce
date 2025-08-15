@@ -6,6 +6,7 @@ import { Login } from './login/login';
 import { Forbidden } from './forbidden/forbidden';
 import { AuthGuard } from './_auth/auth-guard';
 import { CreateNewProduct } from './create-new-product/create-new-product';
+import { ShowProductsDetails } from './show-products-details/show-products-details';
 
 export const routes: Routes = [
   { path: '', component: Home },
@@ -29,4 +30,6 @@ export const routes: Routes = [
     canActivate: [AuthGuard],
     data: { roles: ['admin'] },
   },
+
+  {path:'showProductsDetails',component:ShowProductsDetails}
 ];

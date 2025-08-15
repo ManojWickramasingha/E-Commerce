@@ -15,5 +15,9 @@ export class ProductService {
     return this.httpClient.post<product>(this.PATH_API_URL+'/api/v1/admin/product',product);
   }
 
+  public getAllProduct(){
+    return this.httpClient.get<product[]>(this.PATH_API_URL + '/api/v1/admin/product/all');
+  }
+
 
 }

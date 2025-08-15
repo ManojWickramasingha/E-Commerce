@@ -1,0 +1,23 @@
+/* style.css or component-specific css */
+.mat-table {
+  background: #fff;
+  border-radius: 8px;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+  overflow: hidden;
+}
+
+.mat-header-row, .mat-row {
+  font-family: 'Segoe UI', sans-serif;
+  height: 56px;
+}
+
+.mat-header-cell {
+  background: #f8f9fa;
+  font-weight: 600;
+  color: #495057;
+  letter-spacing: 1px;
+}
+
+.mat-row:hover {
+  background: #f5faff;
+}
