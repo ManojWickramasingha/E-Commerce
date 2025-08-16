@@ -10,6 +10,7 @@ import { FileHandle } from '../_module/FileHandle.model';
 import { DomSanitizer } from '@angular/platform-browser';
 import { MatGridListModule } from '@angular/material/grid-list';
 import { NgFor } from '@angular/common';
+import { Drag } from '../drag';
 
 @Component({
   selector: 'app-create-new-product',
@@ -21,6 +22,7 @@ import { NgFor } from '@angular/common';
     FormsModule,
     MatGridListModule,
     NgFor,
+    Drag,
   ],
   templateUrl: './create-new-product.html',
   styleUrl: './create-new-product.css',
@@ -46,6 +48,7 @@ export class CreateNewProduct {
       next: (response) => {
         console.log(response);
         productForm.reset();
+        this.product.productImages = [];
       },
       error: (err) => {
         console.log(err);
@@ -87,5 +90,9 @@ export class CreateNewProduct {
 
   removeImage(index: number) {
     this.product.productImages.splice(index, 1);
+  }
+
+  fileDrop(fileHandle: FileHandle) {
+    this.product.productImages.push(fileHandle);
   }
 }

@@ -6,12 +6,13 @@ import { Login } from './login/login';
 import { Forbidden } from './forbidden/forbidden';
 import { AuthGuard } from './_auth/auth-guard';
 import { CreateNewProduct } from './create-new-product/create-new-product';
+import { ShowProductsDetails } from './show-products-details/show-products-details';
 
 export const routes: Routes = [
   { path: '', component: Home },
   {
     path: 'admin',
-    component: Admin, 
+    component: Admin,
     canActivate: [AuthGuard],
     data: { roles: ['admin'] },
   },
@@ -23,5 +24,12 @@ export const routes: Routes = [
   },
   { path: 'login', component: Login },
   { path: 'forbidden', component: Forbidden },
-  {path:'createNewProduct',component:CreateNewProduct}
+  {
+    path: 'createNewProduct',
+    component: CreateNewProduct,
+    canActivate: [AuthGuard],
+    data: { roles: ['admin'] },
+  },
+
+  {path:'showProductsDetails',component:ShowProductsDetails}
 ];
