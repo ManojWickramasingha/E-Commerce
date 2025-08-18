@@ -10,6 +10,7 @@ import { ShowImages } from '../show-images/show-images';
 import { MatDialogModule } from '@angular/material/dialog';
 import { ImageProcess } from '../_services/image-process';
 import { map } from 'rxjs';
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-show-products-details',
   imports: [MatTableModule, MatIcon, MatButtonModule, MatDialogModule],
@@ -37,7 +38,8 @@ export class ShowProductsDetails implements OnInit {
   constructor(
     private productService: ProductService,
     private cdr: ChangeDetectorRef,
-    private imageProcess: ImageProcess
+    private imageProcess: ImageProcess,
+    private router:Router
   ) {}
 
   showAllProduct() {
@@ -74,5 +76,9 @@ export class ShowProductsDetails implements OnInit {
     this.dialog.open(ShowImages, { height: '300px', width: '800px', data: {
       images: product.productImages
     } });
+  }
+
+  editProductDetails(productId:number){
+    this.router.navigate(['/createNewProduct',{productId:productId}]);
   }
 }

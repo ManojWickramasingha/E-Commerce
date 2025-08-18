@@ -29,4 +29,8 @@ export class ProductService {
         `/api/v1/admin/product/deleteProductDetail/${productId}`
     );
   }
+
+  public getProductDetailsById(productId:number):Observable<Product>{
+    return this.httpClient.get<Product>(this.PATH_API_URL+`/api/v1/admin/product/getProductDetailById/${productId}`)
+  }
 }

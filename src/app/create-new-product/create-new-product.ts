@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatDividerModule } from '@angular/material/divider';
@@ -9,8 +9,9 @@ import { ProductService } from '../_services/product-service';
 import { FileHandle } from '../_module/FileHandle.model';
 import { DomSanitizer } from '@angular/platform-browser';
 import { MatGridListModule } from '@angular/material/grid-list';
-import { NgFor } from '@angular/common';
+import { NgFor, NgIf } from '@angular/common';
 import { Drag } from '../drag';
+import { ActivatedRoute} from '@angular/router';
 
 @Component({
   selector: 'app-create-new-product',
@@ -23,17 +24,28 @@ import { Drag } from '../drag';
     MatGridListModule,
     NgFor,
     Drag,
-  ],
+    NgIf
+],
   templateUrl: './create-new-product.html',
   styleUrl: './create-new-product.css',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class CreateNewProduct {
+export class CreateNewProduct implements OnInit {
+  isNewProduct = true;
   constructor(
     private productService: ProductService,
-    private sanitizer: DomSanitizer
+    private sanitizer: DomSanitizer,
+    private activateRoute : ActivatedRoute
   ) {}
+  ngOnInit(): void {
+    this.product = this.activateRoute.snapshot.data['product']
+
+    if(this.product && this.product.id){
+      this.isNewProduct = false;
+    }
+  }
   protected product: Product = {
+    id: 0,
     name: '',
     description: '',
     discountedPrice: 0,
