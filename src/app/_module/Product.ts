@@ -1,6 +1,6 @@
 import { FileHandle } from "./FileHandle.model";
 
-export interface product{
+export interface Product{
     name:string,
     description:string,
     discountedPrice: number,

@@ -3,7 +3,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatButtonModule } from '@angular/material/button';
-import { product } from '../_module/Product';
+import { Product } from '../_module/Product';
 import { FormsModule, NgForm } from '@angular/forms';
 import { ProductService } from '../_services/product-service';
 import { FileHandle } from '../_module/FileHandle.model';
@@ -33,7 +33,7 @@ export class CreateNewProduct {
     private productService: ProductService,
     private sanitizer: DomSanitizer
   ) {}
-  protected product: product = {
+  protected product: Product = {
     name: '',
     description: '',
     discountedPrice: 0,
@@ -67,9 +67,11 @@ export class CreateNewProduct {
     };
 
     this.product.productImages.push(fileHandle);
+
+    
   }
 
-  prepareFormData(product: product): FormData {
+  prepareFormData(product: Product): FormData {
     const formData = new FormData();
 
     formData.append(
