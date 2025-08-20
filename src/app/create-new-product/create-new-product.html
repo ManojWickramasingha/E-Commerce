@@ -45,8 +45,23 @@
 
           <div class="d-flex justify-content-end">
             <button matFab extended>Cancel</button>
-            <button type="submit" matFab extended class="ms-2">
+            <button
+              *ngIf="isNewProduct"
+              type="submit"
+              matFab
+              extended
+              class="ms-2"
+            >
               Add Product
+            </button>
+            <button
+              *ngIf="!isNewProduct"
+              type="submit"
+              matFab
+              extended
+              class="ms-2"
+            >
+              Update Product
             </button>
           </div>
         </form>
