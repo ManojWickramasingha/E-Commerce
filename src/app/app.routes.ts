@@ -30,8 +30,13 @@ export const routes: Routes = [
     component: CreateNewProduct,
     canActivate: [AuthGuard],
     data: { roles: ['admin'] },
-    resolve: {product:ProductResolve}
+    resolve: { product: ProductResolve },
   },
 
-  {path:'showProductsDetails',component:ShowProductsDetails}
+  {
+    path: 'showProductsDetails',
+    component: ShowProductsDetails,
+    canActivate: [AuthGuard],
+    data: { roles: ['admin'] },
+  },
 ];
