@@ -1,11 +1,43 @@
-import { Component } from '@angular/core';
+
+import { ChangeDetectorRef, Component, OnInit} from '@angular/core';
+import {MatGridListModule} from '@angular/material/grid-list';
+import { ProductService } from '../_services/product-service';
+import { map } from 'rxjs';
+import { Product } from '../_module/Product';
+import { ImageProcess } from '../_services/image-process';
+import {MatButtonModule} from '@angular/material/button';
+
 
 @Component({
   selector: 'app-home',
-  imports: [],
+  imports: [MatGridListModule,MatButtonModule],
   templateUrl: './home.html',
   styleUrl: './home.css'
 })
-export class Home {
+export class Home implements OnInit {
+    constructor(private productService:ProductService,private imageProcessing:ImageProcess,private cdr:ChangeDetectorRef){}
+    ngOnInit(): void {
+      this.loadProducts();
+    }
+    public productDetailsList:Product[] = [];
+    
+
+    loadProducts(){
+      this.productService.getAllProduct()
+      .pipe(
+        map((products:Product[])=> products.map((product:Product) => this.imageProcessing.createImage(product) ))
+      )
+      .subscribe({
+        next:res => {
+          console.log(res);
+          this.productDetailsList = res
+          this.cdr.detectChanges();
+        },
+        error: err => {
+          console.log(err);
+        }
+      })
+    }
+
 
 }
