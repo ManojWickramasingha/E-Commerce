@@ -21,3 +21,19 @@
 .mat-row:hover {
   background: #f5faff;
 }
+
+table.mat-table {
+  table-layout: fixed;
+  width: 100%;
+}
+
+.mat-column-description {
+  width: 35%;
+  max-width: 35%;
+  word-wrap: break-word;
+}
+
+table th, td{
+  padding: 2%;
+}
+
