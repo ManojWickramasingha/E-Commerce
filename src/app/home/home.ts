@@ -6,6 +6,7 @@ import { map } from 'rxjs';
 import { Product } from '../_module/Product';
 import { ImageProcess } from '../_services/image-process';
 import {MatButtonModule} from '@angular/material/button';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -15,7 +16,9 @@ import {MatButtonModule} from '@angular/material/button';
   styleUrl: './home.css'
 })
 export class Home implements OnInit {
-    constructor(private productService:ProductService,private imageProcessing:ImageProcess,private cdr:ChangeDetectorRef){}
+    constructor(private productService:ProductService,private imageProcessing:ImageProcess,private cdr:ChangeDetectorRef
+      ,private router:Router
+    ){}
     ngOnInit(): void {
       this.loadProducts();
     }
@@ -39,5 +42,7 @@ export class Home implements OnInit {
       })
     }
 
-
+    productViewDetails(productId:number){
+      this.router.navigate(['/productViewDetails',{productId:productId}]);
+    }
 }

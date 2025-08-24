@@ -1,0 +1,18 @@
+mat-grid-tile{
+    padding: 10%;
+    border: 1px gray solid;
+}
+.image-container{
+    height: 300px;
+    position: relative;
+}
+.image{
+    max-width: 90%;
+    max-height: 90%;
+    position: absolute;
+    top:0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    margin: auto;
+}
