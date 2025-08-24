@@ -24,7 +24,7 @@ export class ShowProductsDetails implements OnInit {
   displayedColumns: string[] = [
     'Id',
     'Name',
-    'Description',
+    'description',
     'Discounted Price',
     'Actual Price',
     'Images',

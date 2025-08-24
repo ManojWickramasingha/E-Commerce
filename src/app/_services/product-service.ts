@@ -16,10 +16,11 @@ export class ProductService {
       product
     );
   }
-
-  public getAllProduct() : Observable<Product[]> {
+  requestHeader = new HttpHeaders({ 'No-Auth': 'True' });
+  public getAllProduct(): Observable<Product[]> {
     return this.httpClient.get<Product[]>(
-      this.PATH_API_URL + '/api/v1/admin/product/all'
+      this.PATH_API_URL + '/api/v1/admin/product/all',
+      { headers: this.requestHeader }
     );
   }
 
@@ -30,7 +31,10 @@ export class ProductService {
     );
   }
 
-  public getProductDetailsById(productId:number):Observable<Product>{
-    return this.httpClient.get<Product>(this.PATH_API_URL+`/api/v1/admin/product/getProductDetailById/${productId}`)
+  public getProductDetailsById(productId: number): Observable<Product> {
+    return this.httpClient.get<Product>(
+      this.PATH_API_URL +
+        `/api/v1/admin/product/getProductDetailById/${productId}`
+    );
   }
 }
