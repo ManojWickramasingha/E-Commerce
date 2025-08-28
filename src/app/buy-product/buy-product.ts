@@ -92,4 +92,17 @@ export class BuyProduct implements OnInit {
     return totalPrice;
     
   }
+
+  getGrandTotal():number{
+    let GrandTotal = 0;
+
+    this.orderDetail.productQuantityList.forEach(
+      (productQuantity) => {
+        let price =this.productdetails.filter(product => product.id == productQuantity.productId)[0].discountedPrice;
+        GrandTotal = GrandTotal + price * productQuantity.quantity;
+      }
+    );
+
+    return GrandTotal;
+  }
 }
