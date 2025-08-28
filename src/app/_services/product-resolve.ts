@@ -10,6 +10,7 @@ import { Product } from '../_module/Product';
 import { map, Observable, of } from 'rxjs';
 import { ProductService } from './product-service';
 import { ImageProcess } from './image-process';
+import { HttpHeaders } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root',
@@ -21,6 +22,8 @@ export class ProductResolve implements Resolve<Product> {
     state: RouterStateSnapshot
   ): Observable<Product> {
     const id = route.paramMap.get('productId');
+
+    let requestHeader = new HttpHeaders({'No-Auth':'True'});
 
     if (id) {
       return this.productService.getProductDetailsById(parseInt(id)).pipe(
