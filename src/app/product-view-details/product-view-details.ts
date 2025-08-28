@@ -4,12 +4,8 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Product } from '../_module/Product';
 import {MatGridListModule} from '@angular/material/grid-list';
 import { CdkTableModule } from "@angular/cdk/table";
-import { P } from '@angular/cdk/keycodes';
 
-import { ActivatedRoute } from '@angular/router';
-import { Product } from '../_module/Product';
-import {MatGridListModule} from '@angular/material/grid-list';
-import { CdkTableModule } from "@angular/cdk/table";
+
 
 
 @Component({
@@ -22,7 +18,7 @@ export class ProductViewDetails implements OnInit{
 
   constructor(private activateRoute:ActivatedRoute,private route:Router){}
 
-  constructor(private activateRoute:ActivatedRoute){}
+ 
 
   public productIndex = 0;
   product:Product = {
