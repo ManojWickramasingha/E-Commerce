@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Product } from '../_module/Product';
 import {MatGridListModule} from '@angular/material/grid-list';
 import { CdkTableModule } from "@angular/cdk/table";
+import { P } from '@angular/cdk/keycodes';
 
 @Component({
   selector: 'app-product-view-details',
@@ -11,7 +12,7 @@ import { CdkTableModule } from "@angular/cdk/table";
   styleUrl: './product-view-details.css'
 })
 export class ProductViewDetails implements OnInit{
-  constructor(private activateRoute:ActivatedRoute){}
+  constructor(private activateRoute:ActivatedRoute,private route:Router){}
   public productIndex = 0;
   product:Product = {
     name:'',
@@ -28,6 +29,10 @@ export class ProductViewDetails implements OnInit{
 
   changeIndex(index:number){
     this.productIndex = index;
+  }
+
+  buyProduct(isSingleProductCheckOut:boolean,productId:number){
+    this.route.navigate(['/buyProduct', {isSingleProductCheckOut:isSingleProductCheckOut, id:productId}]);
   }
 
 }

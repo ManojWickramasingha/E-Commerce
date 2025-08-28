@@ -1,0 +1,85 @@
+<div class="container mt-5">
+  <div class="card p-3">
+    <div class="row">
+      <div class="col-6">
+        <form #placeOrderForm="ngForm" (ngSubmit)="PlaceOrder(placeOrderForm)">
+          <mat-form-field appearance="outline" class="w-100">
+            <mat-label>Enter Full Name</mat-label>
+            <input
+              matInput
+              placeholder="Full Name "
+              [(ngModel)]="orderDetail.fullName"
+              name="fullname"
+            />
+          </mat-form-field>
+
+          <mat-form-field appearance="outline" class="w-100">
+            <mat-label>Enter Full Address</mat-label>
+            <input
+              matInput
+              placeholder="Full Address"
+              [(ngModel)]="orderDetail.fullAddress"
+              name="fullAddress"
+            />
+          </mat-form-field>
+
+          <mat-form-field appearance="outline" class="w-100">
+            <mat-label>Enter Contact Number</mat-label>
+            <input
+              matInput
+              placeholder="Contact Number"
+              [(ngModel)]="orderDetail.contactNumber"
+              name="contactNumber"
+            />
+          </mat-form-field>
+
+          <mat-form-field appearance="outline" class="w-100">
+            <mat-label>Enter Alternative Contact Number</mat-label>
+            <input
+              matInput
+              placeholder="Alternative Contact Number "
+              [(ngModel)]="orderDetail.alternateContactNumber"
+              name="alternateContactNumber"
+            />
+          </mat-form-field>
+
+          <div align="right">
+            <button type="submit" class="btn btn-primary">Place Order</button>
+          </div>
+        </form>
+      </div>
+      <div class="col-6">
+        <table class="table">
+          <thead>
+            <tr>
+              <th scope="col">Name</th>
+              <th scope="col">Discounted Price</th>
+              <th scope="col">Quantity</th>
+              <th scope="col">Total</th>
+            </tr>
+          </thead>
+          <tbody>
+            @for (product of productdetails; track $index) {
+            <tr>
+              <td>{{ product.name }}</td>
+              <td>{{ product.discountedPrice }}</td>
+              <td>
+                <select class="form-select"
+                #quantity
+                [ngModel] = "quantityForProduct(product.id)"
+                (change)="changeTotalPrice(quantity.value,product.id,product.discountedPrice)"
+                >
+                  <option value="1">1</option>
+                  <option value="2">2</option>
+                  <option value="3">3</option>
+                </select>
+              </td>
+              <td>{{ getTotal(product.id,product.discountedPrice) }}</td>
+            </tr>
+            }
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
