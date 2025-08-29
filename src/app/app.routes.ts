@@ -12,6 +12,7 @@ import { ProductViewDetails } from './product-view-details/product-view-details'
 
 import { BuyProduct } from './buy-product/buy-product';
 import { BuyProductResolver } from './_services/buy-product-resolver';
+import { Register } from './register/register';
 
 
 export const routes: Routes = [
@@ -60,6 +61,7 @@ export const routes: Routes = [
     resolve:{productDetail:BuyProductResolver}
   },
 
-  {path:'productViewDetails', component:ProductViewDetails, resolve:{product:ProductResolve}}
+  {path:'productViewDetails', component:ProductViewDetails, resolve:{product:ProductResolve}},
+  {path:'register',component:Register}
 
 ];

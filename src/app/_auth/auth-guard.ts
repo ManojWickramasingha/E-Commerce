@@ -25,12 +25,16 @@ export class AuthGuard implements CanActivate {
   ): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
     if (this.userAuthService.getJwtToken() !== null) {
       const role = route.data['roles'] as Array<string>;
+      console.log(role);
       if (role) {
         const match = this.userService.matchRoles(role);
+        console.log(match);
         if (match) {
           return true;
         } else {
+          console.log("awa");
           this.router.navigate(['/forbidden']);
+          return false;
         }
       }
     }

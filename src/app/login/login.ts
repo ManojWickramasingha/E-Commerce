@@ -34,4 +34,8 @@ export class Login {
       },
     });
   }
+
+  register(){
+    this.router.navigate(['/register']);
+  }
 }
