@@ -2,6 +2,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { UserAuth } from './user-auth';
+import { H } from '@angular/cdk/keycodes';
 
 @Injectable({
   providedIn: 'root',
@@ -20,6 +21,10 @@ export class User {
       loginData.value,
       { headers: this.requestHeader }
     );
+  }
+
+  public register(registerForm:NgForm){
+    return this.httpClient.post(this.PATH_URL_API+`/api/v1/user`,registerForm.value,{headers:this.requestHeader})
   }
 
   public matchRoles(allowedRoles: any): boolean {

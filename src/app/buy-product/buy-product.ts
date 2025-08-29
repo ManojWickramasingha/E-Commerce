@@ -31,15 +31,20 @@ export class BuyProduct implements OnInit {
   ngOnInit(): void {
     this.productdetails = this.activatedRoute.snapshot.data['productDetail'];
     console.log(this.productdetails);
+    this.addProductQuantityList();
   }
 
-  PlaceOrder(PlaceOrderForm: NgForm) {
+  addProductQuantityList(){
     this.productdetails.forEach((x) =>
       this.orderDetail.productQuantityList.push({
         productId: x.id,
-        quantity: 2,
+        quantity: 1,
       })
     );
+  }
+
+  PlaceOrder(PlaceOrderForm: NgForm) {
+    
     this.productService.placeOrder(this.orderDetail).subscribe({
       next: (res) => {
         PlaceOrderForm.reset();
@@ -91,5 +96,18 @@ export class BuyProduct implements OnInit {
       
     return totalPrice;
     
+  }
+
+  getGrandTotal():number{
+    let GrandTotal = 0;
+
+    this.orderDetail.productQuantityList.forEach(
+      (productQuantity) => {
+        let price =this.productdetails.filter(product => product.id == productQuantity.productId)[0].discountedPrice;
+        GrandTotal = GrandTotal + price * productQuantity.quantity;
+      }
+    );
+
+    return GrandTotal;
   }
 }
