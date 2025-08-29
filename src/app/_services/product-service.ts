@@ -18,10 +18,11 @@ export class ProductService {
     );
   }
   requestHeader = new HttpHeaders({ 'No-Auth': 'True' });
-  public getAllProduct(): Observable<Product[]> {
+  public getAllProduct(pageNumber:number): Observable<Product[]> {
     return this.httpClient.get<Product[]>(
-      this.PATH_API_URL + '/api/v1/admin/product/all',
-      { headers: this.requestHeader }
+      this.PATH_API_URL + `/api/v1/admin/product/all`,
+      {params:{'pageNumber':pageNumber}, headers:this.requestHeader},
+    
     );
   }
 
@@ -36,15 +37,21 @@ export class ProductService {
     return this.httpClient.get<Product>(
       this.PATH_API_URL +
         `/api/v1/admin/product/getProductDetailById/${productId}`,
-      {headers:this.requestHeader}
+      { headers: this.requestHeader }
     );
   }
 
-  public getProductDetails(isSingleProductCheckOut:boolean,productId:number):Observable<Product[]>{
-    return this.httpClient.get<Product[]>(this.PATH_API_URL+`/api/v1/admin/product/getProductDetail/${isSingleProductCheckOut}/${productId}`);
+  public getProductDetails(
+    isSingleProductCheckOut: boolean,
+    productId: number
+  ): Observable<Product[]> {
+    return this.httpClient.get<Product[]>(
+      this.PATH_API_URL +
+        `/api/v1/admin/product/getProductDetail/${isSingleProductCheckOut}/${productId}`
+    );
   }
 
-  public placeOrder(orderDetail:OrderDetail){
-   return this.httpClient.post(this.PATH_API_URL+`/placeOrder`,orderDetail)
+  public placeOrder(orderDetail: OrderDetail) {
+    return this.httpClient.post(this.PATH_API_URL + `/placeOrder`, orderDetail);
   }
 }

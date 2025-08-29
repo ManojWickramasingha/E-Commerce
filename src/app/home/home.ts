@@ -20,13 +20,14 @@ export class Home implements OnInit {
       ,private router:Router
     ){}
     ngOnInit(): void {
-      this.loadProducts();
+      this.loadProducts(this.pageNumber);
     }
     public productDetailsList:Product[] = [];
+    public pageNumber: number = 0;
     
 
-    loadProducts(){
-      this.productService.getAllProduct()
+    loadProducts(pageNumber:number){
+      this.productService.getAllProduct(pageNumber)
       .pipe(
         map((products:Product[])=> products.map((product:Product) => this.imageProcessing.createImage(product) ))
       )
@@ -44,5 +45,10 @@ export class Home implements OnInit {
 
     productViewDetails(productId:number){
       this.router.navigate(['/productViewDetails',{productId:productId}]);
+    }
+
+   public viewMore(){
+      this.pageNumber = this.pageNumber + 1;
+      this.loadProducts(this.pageNumber);
     }
 }

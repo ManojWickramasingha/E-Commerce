@@ -20,6 +20,7 @@ import { Router } from '@angular/router';
 export class ShowProductsDetails implements OnInit {
   readonly dialog = inject(MatDialog);
   public productDetails: Product[] = [];
+  public pageNumber:number = 0;
 
   displayedColumns: string[] = [
     'Id',
@@ -44,7 +45,7 @@ export class ShowProductsDetails implements OnInit {
 
   showAllProduct() {
     this.productService
-      .getAllProduct()
+      .getAllProduct(this.pageNumber)
       .pipe(
         map((products: Product[]) =>
           products.map((product: Product) => this.imageProcess.createImage(product))
