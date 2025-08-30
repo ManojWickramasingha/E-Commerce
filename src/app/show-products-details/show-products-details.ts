@@ -11,9 +11,12 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { ImageProcess } from '../_services/image-process';
 import { map } from 'rxjs';
 import { Router } from '@angular/router';
+import { CommonModule } from '@angular/common';
+
+
 @Component({
   selector: 'app-show-products-details',
-  imports: [MatTableModule, MatIcon, MatButtonModule, MatDialogModule],
+  imports: [MatTableModule, MatIcon, MatButtonModule, MatDialogModule,CommonModule],
   templateUrl: './show-products-details.html',
   styleUrl: './show-products-details.css',
 })
@@ -21,6 +24,8 @@ export class ShowProductsDetails implements OnInit {
   readonly dialog = inject(MatDialog);
   public productDetails: Product[] = [];
   public pageNumber:number = 0;
+  public showTable:boolean = false;
+  public viewMoreBtn:boolean = false;
 
   displayedColumns: string[] = [
     'Id',
@@ -33,7 +38,7 @@ export class ShowProductsDetails implements OnInit {
     'Delete',
   ];
   ngOnInit(): void {
-    this.showAllProduct();
+    this.showAllProduct(this.pageNumber);
   }
 
   constructor(
@@ -43,9 +48,11 @@ export class ShowProductsDetails implements OnInit {
     private router:Router
   ) {}
 
-  showAllProduct() {
+  showAllProduct(pageNumber:number) {
+    this.showTable = false;
+    this.viewMoreBtn = false;
     this.productService
-      .getAllProduct(this.pageNumber)
+      .getAllProduct(pageNumber)
       .pipe(
         map((products: Product[]) =>
           products.map((product: Product) => this.imageProcess.createImage(product))
@@ -53,8 +60,17 @@ export class ShowProductsDetails implements OnInit {
       )
       .subscribe({
         next: (response: Product[]) => {
-          this.productDetails = response;
-          this.cdr.detectChanges();
+        response.forEach(product => this.productDetails.push(product))
+        console.log(this.productDetails);
+        this.showTable = true;
+        
+
+        if(response.length == 12)
+            this.viewMoreBtn = true;
+        else
+           this.viewMoreBtn = false;
+
+        this.cdr.detectChanges();
         },
         error: (error: HttpErrorResponse) => {
           console.log(error);
@@ -65,7 +81,7 @@ export class ShowProductsDetails implements OnInit {
   deleteProductDetails(productId: number) {
     this.productService.deleteProductDetails(productId).subscribe({
       next: (response) => {
-        this.showAllProduct();
+        this.showAllProduct(this.pageNumber);
       },
       error: (error: HttpErrorResponse) => {
         console.log(error);
@@ -81,5 +97,10 @@ export class ShowProductsDetails implements OnInit {
 
   editProductDetails(productId:number){
     this.router.navigate(['/createNewProduct',{productId:productId}]);
+  }
+
+  viewMore(){
+    this.pageNumber = this.pageNumber + 1;
+    this.showAllProduct(this.pageNumber);
   }
 }
