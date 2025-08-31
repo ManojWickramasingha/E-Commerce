@@ -17,12 +17,12 @@ export class ProductService {
       product
     );
   }
+
   requestHeader = new HttpHeaders({ 'No-Auth': 'True' });
-  public getAllProduct(pageNumber:number): Observable<Product[]> {
+  public getAllProduct(pageNumber:number, searchKey:string = ""): Observable<Product[]> {
     return this.httpClient.get<Product[]>(
       this.PATH_API_URL + `/api/v1/admin/product/all`,
-      {params:{'pageNumber':pageNumber}, headers:this.requestHeader},
-    
+      {params:{'pageNumber':pageNumber, 'searchKey':searchKey}, headers:this.requestHeader},
     );
   }
 
