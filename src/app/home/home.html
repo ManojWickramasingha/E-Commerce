@@ -1,30 +1,60 @@
 <div class="container mt-5">
+  <div>
+    <mat-form-field appearance="outline" class="w-100 mb-3">
+      <mat-label>Search Product</mat-label>
+      <input
+        #searchInput
+        (keyup)="searchKeyWord(searchInput.value)"
+        type="text"
+        name="searchProduct"
+        id="searchProduct"
+        ngModel
+        matInput
+        placeholder=" Search Product here"
+      />
+      <mat-hint>searchProduct</mat-hint>
+    </mat-form-field>
+  </div>
+
   <mat-grid-list cols="4" rowHeight="2:3" gutterSize="10">
     @if(productDetailsList.length === 0){
-      <p>Product Loading...</p>
+    <p>Product Loading...</p>
+    } @for (product of productDetailsList; track product.id) {
+    <mat-grid-tile>
+      <div class="row p-5">
+        <div class="image-container">
+          <img
+            class="product-deatails"
+            [src]="product.productImages[0].url"
+            alt="image"
+          />
+        </div>
+
+        <div class="mt-3">
+          <p><b>{{ product.name }}</b></p>
+        </div>
+        <div class="mt-2 description">
+          <p>{{ product.description }}</p>
+        </div>
+        <div class="mt-2">
+          <p>
+            <b>Rs.{{ product.discountedPrice }}</b> &nbsp;
+            <b>{{ product.actualPrice }}</b>
+          </p>
+        </div>
+        <div class="mt-2">
+          <button matButton="filled" (click)="productViewDetails(product.id)">
+            View Details
+          </button>
+        </div>
+      </div>
+    </mat-grid-tile>
     }
-    @for (product of productDetailsList; track product.id) {
-       <mat-grid-tile>
-          <div class="row p-5">
-            <div class="image-container">
-               <img class="product-deatails" [src]="product.productImages[0].url" alt="image">
-            </div>
-           
-            <div class="mt-3">
-               <p><b>{{ product.name }}</b></p> 
-            </div>
-            <div class="mt-2 description" >
-              <p>{{ product.description }}</p>
-            </div>
-            <div class="mt-2">
-              <p> <b>Rs.{{ product.discountedPrice }}</b> &nbsp; <b>{{ product.actualPrice }}</b></p>
-            </div>
-            <div class="mt-2">
-               <button matButton="filled" (click)="productViewDetails(product.id)">View Details</button>
-            </div>
-          </div>
-       </mat-grid-tile>
-    }
-   
   </mat-grid-list>
+
+  <div class="mt-5 text-center">
+    <button class="btn btn-danger" (click)="viewMore()">View More</button>
+  </div>
+
+  <div class="mt-5 card"></div>
 </div>
