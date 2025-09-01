@@ -12,17 +12,15 @@ import { ImageProcess } from '../_services/image-process';
 import { map } from 'rxjs';
 import { Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
- feature/home_pagination
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatInputModule} from '@angular/material/input';
 
 
 
+
 @Component({
   selector: 'app-show-products-details',
- feature/home_pagination
   imports: [MatTableModule, MatIcon, MatButtonModule, MatDialogModule,CommonModule,MatFormFieldModule,MatInputModule],
-
   templateUrl: './show-products-details.html',
   styleUrl: './show-products-details.css',
 })
@@ -54,7 +52,7 @@ export class ShowProductsDetails implements OnInit {
     private router:Router
   ) {}
 
- feature/home_pagination
+
   showAllProduct(pageNumber:number, searchKey:string = "") {
     this.showTable = false;
     this.viewMoreBtn = false;
@@ -111,7 +109,7 @@ export class ShowProductsDetails implements OnInit {
     this.pageNumber = this.pageNumber + 1;
     this.showAllProduct(this.pageNumber);
   }
- feature/home_pagination
+
 
   searchKeyWord(searchKeyWord: string){
     this.pageNumber = 0;
