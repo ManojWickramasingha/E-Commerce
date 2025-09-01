@@ -17,6 +17,9 @@
   </div>
 
   <div class="card p-2 shadow-inherit">
+    
+feature/home_pagination
+
     <div *ngIf="showTable">
       <table mat-table [dataSource]="productDetails" class="mt-4 mat-table">
         <!--- Note that these columns can be defined in any order.
@@ -27,6 +30,8 @@
           <th mat-header-cell *matHeaderCellDef>Id</th>
           <td mat-cell *matCellDef="let element">{{element.id}}</td>
         </ng-container>
+        
+ feature/home_pagination
 
         <!-- Name Column -->
         <ng-container matColumnDef="Name">
@@ -71,17 +76,25 @@
         <!-- Edit Column -->
         <ng-container matColumnDef="Edit">
           <th mat-header-cell *matHeaderCellDef>Edit</th>
+
           <td mat-cell *matCellDef="let element">
             <button
               matFab
               aria-label="Example icon button with a delete icon"
+ feature/home_pagination
               (click)="editProductDetails(element.id)"
             >
               <mat-icon>edit</mat-icon>
+
+              (click)="showImage(element)"
+            >
+              <mat-icon>images</mat-icon>
+
             </button>
           </td>
         </ng-container>
 
+ feature/home_pagination
         <!-- Delete Column -->
         <ng-container matColumnDef="Delete">
           <th mat-header-cell *matHeaderCellDef>Delete</th>
@@ -92,10 +105,12 @@
               (click)="deleteProductDetails(element.id)"
             >
               <mat-icon>delete</mat-icon>
+
             </button>
           </td>
         </ng-container>
 
+ feature/home_pagination
         <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
         <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
       </table>
@@ -105,6 +120,7 @@
       <button class="btn btn-danger" *ngIf="viewMoreBtn" (click)="viewMore()">
         View More
       </button>
+
     </div>
   </div>
 </div>
