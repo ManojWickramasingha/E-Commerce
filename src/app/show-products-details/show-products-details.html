@@ -1,6 +1,22 @@
 <div class="container mt-5">
+  <div>
+    <mat-form-field appearance="outline" class="w-100 mb-3">
+      <mat-label>Search Product</mat-label>
+      <input
+        #searchInput
+        (keyup)="searchKeyWord(searchInput.value)"
+        type="text"
+        name="searchProduct"
+        id="searchProduct"
+        ngModel
+        matInput
+        placeholder=" Search Product here"
+      />
+      <mat-hint>searchProduct</mat-hint>
+    </mat-form-field>
+  </div>
+
   <div class="card p-2 shadow-inherit">
-   
     <div *ngIf="showTable">
       <table mat-table [dataSource]="productDetails" class="mt-4 mat-table">
         <!--- Note that these columns can be defined in any order.
@@ -85,11 +101,10 @@
       </table>
     </div>
 
-
-    
-
     <div class="text-center mt-5">
-      <button class="btn btn-danger" *ngIf="viewMoreBtn" (click)="viewMore()">View More</button>
+      <button class="btn btn-danger" *ngIf="viewMoreBtn" (click)="viewMore()">
+        View More
+      </button>
     </div>
   </div>
 </div>
