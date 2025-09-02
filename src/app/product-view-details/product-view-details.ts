@@ -4,6 +4,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Product } from '../_module/Product';
 import {MatGridListModule} from '@angular/material/grid-list';
 import { CdkTableModule } from "@angular/cdk/table";
+import { ProductService } from '../_services/product-service';
 
 
 
@@ -16,7 +17,7 @@ import { CdkTableModule } from "@angular/cdk/table";
 })
 export class ProductViewDetails implements OnInit{
 
-  constructor(private activateRoute:ActivatedRoute,private route:Router){}
+  constructor(private activateRoute:ActivatedRoute,private route:Router,private productService:ProductService){}
 
  
 
@@ -31,7 +32,7 @@ export class ProductViewDetails implements OnInit{
   }
   ngOnInit(): void {
     this.product = this.activateRoute.snapshot.data['product'];
-    console.log(this.product);
+    
   }
 
   changeIndex(index:number){
@@ -41,6 +42,17 @@ export class ProductViewDetails implements OnInit{
 
   buyProduct(isSingleProductCheckOut:boolean,productId:number){
     this.route.navigate(['/buyProduct', {isSingleProductCheckOut:isSingleProductCheckOut, id:productId}]);
+  }
+
+  addCart(productId:number){
+    this.productService.addCart(productId).subscribe({
+      next: res =>{
+        console.log(res);
+      },
+      error: err =>{
+        console.log(err);
+      }
+    })
   }
 
 
