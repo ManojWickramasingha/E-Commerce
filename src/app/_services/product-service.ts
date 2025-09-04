@@ -58,4 +58,8 @@ export class ProductService {
   public addCart(productId:number){
     return this.httpClient.get(this.PATH_API_URL+`/add_cart/`+productId);
   }
+
+  public getCartDetails():Observable<any[]>{
+    return this.httpClient.get<any[]>(this.PATH_API_URL+`/getCartDetails`);
+  }
 }
