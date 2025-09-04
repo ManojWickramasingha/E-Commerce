@@ -9,6 +9,7 @@
   <button matButton routerLink="/" class="text-white">Home</button>
   <button  *ngIf="isAdmin()"  matButton class="ms-2 text-white" routerLink="/createNewProduct" >Create New Product</button>
   <button  *ngIf="isAdmin()"  matButton class="ms-2 text-white" routerLink="/showProductsDetails" >Show Products</button>
+  <button *ngIf="!isAdmin()" matButton class="ms-2 text-white" routerLink="/cart">Cart</button>
 </mat-toolbar>
 
 
