@@ -62,4 +62,8 @@ export class ProductService {
   public getCartDetails():Observable<any[]>{
     return this.httpClient.get<any[]>(this.PATH_API_URL+`/getCartDetails`);
   }
+
+  public deleteCartItem(cartId:number){
+    return this.httpClient.get(this.PATH_API_URL+`/deleteCartItem/${cartId}`);
+  }
 }
