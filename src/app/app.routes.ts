@@ -14,6 +14,7 @@ import { BuyProduct } from './buy-product/buy-product';
 import { BuyProductResolver } from './_services/buy-product-resolver';
 import { Register } from './register/register';
 import { Cart } from './cart/cart';
+import { PlaceOrderMessage } from './place-order-message/place-order-message';
 
 
 export const routes: Routes = [
@@ -59,11 +60,12 @@ export const routes: Routes = [
     component: BuyProduct,
     canActivate: [AuthGuard],
     data: { roles: ['user'] },
-    resolve:{productDetail:BuyProductResolver}
+    resolve:{productDetail:BuyProductResolver, isSingleProductCheckOut:BuyProductResolver}
   },
 
   {path:'productViewDetails', component:ProductViewDetails, resolve:{product:ProductResolve}},
   {path:'register',component:Register},
-  {path:'cart',component:Cart}
+  {path:'cart',component:Cart},
+  {path:'palceOrderSuccess',component:PlaceOrderMessage}
 
 ];

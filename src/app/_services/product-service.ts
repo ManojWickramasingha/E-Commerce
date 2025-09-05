@@ -51,8 +51,8 @@ export class ProductService {
     );
   }
 
-  public placeOrder(orderDetail: OrderDetail) {
-    return this.httpClient.post(this.PATH_API_URL + `/placeOrder`, orderDetail);
+  public placeOrder(orderDetail: OrderDetail,isSingleProductCheckOut:boolean) {
+    return this.httpClient.post(this.PATH_API_URL + `/placeOrder/${isSingleProductCheckOut}`, orderDetail);
   }
 
   public addCart(productId:number){
