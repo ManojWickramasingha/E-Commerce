@@ -1,4 +1,8 @@
 <div class="container mt-5">
+  <div align="right" class="mb-3">
+    <button (click)="checkOut(true,0)" class="btn btn-primary">checkOut</button>
+  </div>
+
   <div>
     <table mat-table [dataSource]="cartDetails" class="mat-elevation-z8">
       <!--- Note that these columns can be defined in any order.

@@ -48,6 +48,8 @@ export class BuyProduct implements OnInit {
     this.productService.placeOrder(this.orderDetail).subscribe({
       next: (res) => {
         PlaceOrderForm.reset();
+        this.productdetails = [];
+        this.orderDetail.productQuantityList = [];
       },
       error: (err) => {
         console.log(err);
