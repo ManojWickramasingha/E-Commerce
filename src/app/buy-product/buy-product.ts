@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Product } from '../_module/Product';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
@@ -17,10 +17,11 @@ import { ProductService } from '../_services/product-service';
 export class BuyProduct implements OnInit {
   constructor(
     private activatedRoute: ActivatedRoute,
-    private productService: ProductService
+    private productService: ProductService,
+    private router:Router
   ) {}
   public productdetails: Product[] = [];
-
+  public isSingleProductCheckOut:boolean = false;
   public orderDetail: OrderDetail = {
     fullName: '',
     fullAddress: '',
@@ -30,6 +31,10 @@ export class BuyProduct implements OnInit {
   };
   ngOnInit(): void {
     this.productdetails = this.activatedRoute.snapshot.data['productDetail'];
+    this.activatedRoute.paramMap.subscribe(paramMap => {
+      const isSingle = paramMap.get('isSingleProductCheckOut');
+      this.isSingleProductCheckOut = isSingle === 'true';
+    });
     console.log(this.productdetails);
     this.addProductQuantityList();
   }
@@ -45,9 +50,12 @@ export class BuyProduct implements OnInit {
 
   PlaceOrder(PlaceOrderForm: NgForm) {
     
-    this.productService.placeOrder(this.orderDetail).subscribe({
+    this.productService.placeOrder(this.orderDetail,this.isSingleProductCheckOut).subscribe({
       next: (res) => {
         PlaceOrderForm.reset();
+        this.productdetails = [];
+        this.orderDetail.productQuantityList = [];
+        this.router.navigate(['/palceOrderSuccess']);
       },
       error: (err) => {
         console.log(err);

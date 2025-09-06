@@ -51,8 +51,20 @@ export class ProductService {
     );
   }
 
-  public placeOrder(orderDetail: OrderDetail) {
-    return this.httpClient.post(this.PATH_API_URL + `/placeOrder`, orderDetail);
+  public placeOrder(orderDetail: OrderDetail,isSingleProductCheckOut:boolean) {
+    return this.httpClient.post(this.PATH_API_URL + `/placeOrder/${isSingleProductCheckOut}`, orderDetail);
+  }
+
+  public addCart(productId:number){
+    return this.httpClient.get(this.PATH_API_URL+`/add_cart/`+productId);
+  }
+
+  public getCartDetails():Observable<any[]>{
+    return this.httpClient.get<any[]>(this.PATH_API_URL+`/getCartDetails`);
+  }
+
+  public deleteCartItem(cartId:number){
+    return this.httpClient.get(this.PATH_API_URL+`/deleteCartItem/${cartId}`);
   }
 
   public addCart(productId:number){
