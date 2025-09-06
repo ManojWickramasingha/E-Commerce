@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { Product } from '../_module/Product';
 import { Observable } from 'rxjs';
 import { OrderDetail } from '../_module/Order-Detail.module';
+import { MyOrder } from '../_module/MyOrders.module';
 
 @Injectable({
   providedIn: 'root',
@@ -67,7 +68,9 @@ export class ProductService {
     return this.httpClient.get(this.PATH_API_URL+`/deleteCartItem/${cartId}`);
   }
 
- 
+  public getOrderDetails():Observable<MyOrder[]>{
+    return this.httpClient.get<MyOrder[]>(this.PATH_API_URL+`/getOrderDetails`);
+  }
 
  
 }

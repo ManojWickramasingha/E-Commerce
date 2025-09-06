@@ -15,6 +15,7 @@ import { BuyProductResolver } from './_services/buy-product-resolver';
 import { Register } from './register/register';
 import { Cart } from './cart/cart';
 import { PlaceOrderMessage } from './place-order-message/place-order-message';
+import { Orders } from './orders/orders';
 
 
 
@@ -67,7 +68,8 @@ export const routes: Routes = [
   {path:'productViewDetails', component:ProductViewDetails, resolve:{product:ProductResolve}},
   {path:'register',component:Register},
   {path:'cart',component:Cart, canActivate:[AuthGuard], data:{roles:['user']}},
-  {path:'palceOrderSuccess',component:PlaceOrderMessage, canActivate:[AuthGuard], data:{roles:['user']}}
+  {path:'palceOrderSuccess',component:PlaceOrderMessage, canActivate:[AuthGuard], data:{roles:['user']}},
+  {path:'myOrder',component:Orders,canActivate:[AuthGuard], data:{roles:['user']}}
 
 
 ];
