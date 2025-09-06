@@ -8,6 +8,7 @@
       <!--- Note that these columns can be defined in any order.
         The actual rendered columns are set as a property on the row definition" -->
 
+
       <!-- Id Column -->
       <ng-container matColumnDef="id">
         <th mat-header-cell *matHeaderCellDef>Id</th>
@@ -20,17 +21,20 @@
         <td mat-cell *matCellDef="let element">{{ element.product.name }}</td>
       </ng-container>
 
+
       <!-- discription Column -->
       <ng-container matColumnDef="discription">
         <th mat-header-cell *matHeaderCellDef>Discription</th>
         <td mat-cell *matCellDef="let element">{{ element.product.description }}</td>
       </ng-container>
 
+
       <!--discounted Price Column -->
       <ng-container matColumnDef="discounted Price">
         <th mat-header-cell *matHeaderCellDef>Discounted Price</th>
         <td mat-cell *matCellDef="let element">{{ element.product.discountedPrice }}</td>
       </ng-container>
+
 
       <!--Action Column -->
       <ng-container matColumnDef="action">
@@ -45,6 +49,7 @@
             </button>
         </td>
       </ng-container>
+
 
       <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
       <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>

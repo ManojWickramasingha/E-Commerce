@@ -15,11 +15,13 @@ export class Cart implements OnInit{
 
 public cartDetails:any[] = [];
 
+
   constructor(private prodcutService:ProductService, private cdr:ChangeDetectorRef,private router:Router){}
   ngOnInit(): void {
     this.getCartDetail();
   }
   displayedColumns: string[] = ['id', 'name', 'discription', 'discounted Price', 'action'];
+
 
   getCartDetail(){
     this.prodcutService.getCartDetails().subscribe({
@@ -31,6 +33,7 @@ public cartDetails:any[] = [];
       error: err => {}
     })
   }
+
 
   checkOut(isSingleProductCheckOut:boolean,productId:number){
     this.router.navigate(['/buyProduct', {'isSingleProductCheckOut':isSingleProductCheckOut, 'id':productId}])

@@ -17,6 +17,7 @@ import { Cart } from './cart/cart';
 import { PlaceOrderMessage } from './place-order-message/place-order-message';
 
 
+
 export const routes: Routes = [
   { path: '', component: Home },
   {
@@ -67,5 +68,6 @@ export const routes: Routes = [
   {path:'register',component:Register},
   {path:'cart',component:Cart, canActivate:[AuthGuard], data:{roles:['user']}},
   {path:'palceOrderSuccess',component:PlaceOrderMessage, canActivate:[AuthGuard], data:{roles:['user']}}
+
 
 ];
