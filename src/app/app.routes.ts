@@ -65,7 +65,7 @@ export const routes: Routes = [
 
   {path:'productViewDetails', component:ProductViewDetails, resolve:{product:ProductResolve}},
   {path:'register',component:Register},
-  {path:'cart',component:Cart},
-  {path:'palceOrderSuccess',component:PlaceOrderMessage}
+  {path:'cart',component:Cart, canActivate:[AuthGuard], data:{roles:['user']}},
+  {path:'palceOrderSuccess',component:PlaceOrderMessage, canActivate:[AuthGuard], data:{roles:['user']}}
 
 ];
