@@ -72,5 +72,9 @@ export class ProductService {
     return this.httpClient.get<MyOrder[]>(this.PATH_API_URL+`/getOrderDetails`);
   }
 
+  public getOrderInfo(){
+    return this.httpClient.get(this.PATH_API_URL+`/getAllOrder`)
+  }
+
  
 }

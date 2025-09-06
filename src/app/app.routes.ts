@@ -16,6 +16,7 @@ import { Register } from './register/register';
 import { Cart } from './cart/cart';
 import { PlaceOrderMessage } from './place-order-message/place-order-message';
 import { Orders } from './orders/orders';
+import { OrderInfo } from './order-info/order-info';
 
 
 
@@ -46,6 +47,13 @@ export const routes: Routes = [
   {
     path: 'showProductsDetails',
     component: ShowProductsDetails,
+    canActivate: [AuthGuard],
+    data: { roles: ['admin'] },
+  },
+
+    {
+    path: 'orderInfomation',
+    component: OrderInfo,
     canActivate: [AuthGuard],
     data: { roles: ['admin'] },
   },
