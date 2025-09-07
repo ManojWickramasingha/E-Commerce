@@ -76,5 +76,9 @@ export class ProductService {
     return this.httpClient.get(this.PATH_API_URL+`/getAllOrder`)
   }
 
+  public markOrderDelivered(orderId:number){
+    return this.httpClient.get(this.PATH_API_URL+`/markOrderDelivered/${orderId}`);
+  }
+
  
 }

@@ -1,8 +1,8 @@
 import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { ProductService } from '../_services/product-service';
 import {MatTableModule} from '@angular/material/table'
-import { OrderDetail } from '../_module/Order-Detail.module';
 import { MyOrder } from '../_module/MyOrders.module';
+
 
 @Component({
   selector: 'app-orders',
@@ -29,6 +29,10 @@ export class Orders implements OnInit{
         console.log(err);
       }
     })
+  }
+
+  markOrderDelivered(orderId:number){
+    console.log(orderId);
   }
 
 }
